@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mybatis.boardMapper">
+
+	<!-- resultType은 나가는 값, parameterType은 들어오는 값 -->
+
+	<select id="listBoard" resultType="boardDTO">
+		select * from board order by num desc
+	</select>
+	
+	<insert id="insertBoard" parameterType="boardDTO">
+		insert into board values(spring_board_seq.nextval,#{writer},#{email},#{subject},#{passwd},sysdate,0,#{content},#{ip})
+	</insert>
+	
+	<select id="getBoard" resultType="boardDTO" parameterType="int">
+		select * from board where num = #{num}
+	</select>
+	
+	<update id="plusCount" parameterType="int">
+		update board set readcount = readcount+1 where num = #{num}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board where num = #{num}
+	</delete>
+	
+	<select id="isPassword" parameterType="int" resultType="String">
+		select passwd from board where num = #{num}
+	</select>
+	
+	<update id="updateBoard" parameterType="boardDTO">
+		update board set writer=#{writer}, email=#{email}, subject=#{subject}, content=#{content} where num = #{num}
+	</update>
+	
+</mapper>

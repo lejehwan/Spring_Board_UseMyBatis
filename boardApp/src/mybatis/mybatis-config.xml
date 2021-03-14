@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 프로퍼티 부분 -->
+	<properties resource="mybatis/db.properties">
+	</properties>
+	
+	<!-- 별칭(타이핑을 줄여줌) -->
+	<typeAliases>
+		<typeAlias type="board.dto.BoardDBBean" alias="boardDTO"/>
+	</typeAliases>	
+		
+  <environments default="development">
+    <environment id="development">
+    <!-- JDBC 커넥션을 위한 구현체 -->
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  
+  <!-- 실제 작업할 공간 -->
+  <mappers>
+    <mapper resource="mybatis/boardMapper.xml"/>
+  </mappers>
+  
+</configuration>
